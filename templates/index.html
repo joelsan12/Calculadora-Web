@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Básica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora Básica</h1>
+        <form method="POST">
+            <input type="number" name="n1" placeholder="Número 1" required>
+            <input type="number" name="n2" placeholder="Número 2" required>
+            <select name="opcion" required>
+                <option value="1">Suma</option>
+                <option value="2">Resta</option>
+                <option value="3">Multiplicación</option>
+                <option value="4">División</option>
+            </select>
+            <button type="submit">Calcular</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+        {% if resultado is not none %}
+            <div class="result">
+                El resultado de la {{ operacion }} es: {{ resultado }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
